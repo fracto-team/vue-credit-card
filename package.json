@@ -1,8 +1,25 @@
 {
   "name": "@fracto/vue-credit-card",
-  "repository": "https://github.com/fracto-team/fracto-vue-credit-card.git",
+  "description": "Another Credit Card Component for VueJS",
+  "keywords": [
+      "vue",
+      "component",
+      "credit",
+      "credit card"
+  ],
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/fracto-team/vue-credit-card.git"
+  },
   "author": "Orkun ÇAKILKAYA <orkuncakilkaya@gmail.com>",
-  "version": "0.1.0",
+  "contributors": [
+      {
+          "name": "Eray Aydın",
+          "email": "er@yayd.in",
+          "url": "https://era.yayd.in"
+      }
+  ],
+  "version": "0.1.1",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -12,7 +29,11 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "files": [
-    "dist/*"
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
   ],
   "dependencies": {
     "core-js": "^3.4.3",
