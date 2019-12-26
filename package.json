@@ -1,6 +1,9 @@
 {
   "name": "@fracto/vue-credit-card",
+  "repository": "https://github.com/fracto-team/fracto-vue-credit-card.git",
+  "author": "Orkun ÇAKILKAYA <orkuncakilkaya@gmail.com>",
   "version": "0.1.0",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
