@@ -1,0 +1,17 @@
+{
+  "form": {
+    "sensitive": "Kart Bilgilerimi Gizle",
+    "holder": "Ad Soyad",
+    "number": "Kart Numarası",
+    "expiryMonth": "Ay",
+    "expiryYear": "Yıl",
+    "cvv": "Güvenlik Kodu"
+  },
+  "placeholders": {
+    "holder": "İsim Soyisim",
+    "cvv": "XXX",
+    "expiryMonth": "XX",
+    "expiryYear": "XX",
+    "number": "0000 0000 0000 0000"
+  }
+}
