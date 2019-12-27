@@ -50,7 +50,9 @@
         },
         computed: {
             cardType() {
-                return getCardType(this.cardNumberField);
+                const card_type = getCardType(this.cardNumberField, this.cardTypes);
+
+                return card_type ? card_type.name : null;
             },
             cardNumber() {
                 if (this.hideSensitive && this.cardNumberField) {
@@ -87,11 +89,8 @@
                 return this.expiryYearField.padStart(2, '0');
             },
             cardTypeImage() {
-                const type = getCardType(this.cardNumberField);
-                if (type && type.length > 0 && type in this.cardTypes) {
-                    return this.cardTypes[type];
-                }
-                return null;
+                const type = getCardType(this.cardNumberField, this.cardTypes);
+                return type ? type.icon : null;
             },
         },
     };

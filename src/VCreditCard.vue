@@ -60,9 +60,11 @@
 <script>
     import CardPreview from './components/CardPreview';
     import CardNumberField from './components/CardNumberField';
-    import {CARD_TYPES} from './contants/card_images_contants';
+    import {CARD_TYPES} from './contants/card_types_constants';
+    import i18n from './i18n';
 
     export default {
+        i18n,
         name: 'v-credit-card',
         components: {CardPreview, CardNumberField},
         props: {
@@ -71,7 +73,7 @@
                 default: true,
             },
             cardTypes: {
-                type: Object,
+                type: Array,
                 default: () => {
                     return CARD_TYPES;
                 },
@@ -90,16 +92,16 @@
         computed: {
             model() {
                 return {
-                    cardHolder: this.cardHolder,
-                    cardNumber: this.cardNumber,
+                    holder: this.fullName,
+                    number: this.cardNumber,
+                    month: this.expiryMonth,
+                    year: this.expiryYear,
                     cvv: this.cvv,
-                    expiryMonth: this.expiryMonth,
-                    expiryYear: this.expiryYear,
                 };
             },
         },
         watch: {
-            cardHolder() {
+            fullName() {
                 this.$emit('input', this.model);
             },
             cardNumber() {

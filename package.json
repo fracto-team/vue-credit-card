@@ -19,13 +19,14 @@
           "url": "https://era.yayd.in"
       }
   ],
-  "version": "0.1.1",
+  "main": "./dist/vue-credit-card.common.js",
+  "version": "0.1.6",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "before-publish": "vue-cli-service build --target lib --name vue-credit-card src/VCreditCard.vue",
+    "build-bundle": "vue-cli-service build --target lib --name VueCreditCard src/VCreditCard.vue",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "files": [
