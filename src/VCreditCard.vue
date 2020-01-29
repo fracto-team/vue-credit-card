@@ -37,20 +37,24 @@
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryMonth">{{$t('form.expiryMonth')}}</label>
-                    <input type="number" class="vcc-control" id="expiryMonth" v-model="expiryMonth" step="1" min="1"
-                           max="12"/>
+                    <select class="vcc-control" id="expiryMonth" v-model="expiryMonth">
+                        <option :value="month" v-for="month in 12" :key="month">{{month}}</option>
+                    </select>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryYear">{{$t('form.expiryYear')}}</label>
-                    <input type="number" class="vcc-control" id="expiryYear" v-model="expiryYear" step="1" max="99"/>
+                    <select class="vcc-control" id="expiryYear" v-model="expiryYear">
+                        <option :value="year" v-for="year in yearRange" :key="year">{{year}}</option>
+                    </select>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="cvv">{{$t('form.cvv')}}</label>
-                    <input type="number" class="vcc-control" id="cvv" v-model="cvv" step="1" max="9999"/>
+                    <input type="number" class="vcc-control" id="cvv" v-model="cvv" step="1" max="9999"
+                           @input="cvvChanged"/>
                 </div>
             </div>
         </div>
@@ -87,6 +91,7 @@
                 expiryYear: '',
                 fullName: '',
                 sensitive: false,
+                yearRange: [],
             };
         },
         computed: {
@@ -115,6 +120,20 @@
             },
             cvv() {
                 this.$emit('input', this.model);
+            },
+        },
+        mounted() {
+            const maxYear = new Date().getUTCFullYear() + 10;
+            for (let i = new Date().getUTCFullYear(); i <= maxYear; i++) {
+                this.yearRange.push(i);
+            }
+        },
+        methods: {
+            cvvChanged($ev) {
+                const max = parseInt($ev.target.max);
+                if (this.cvv > max) {
+                    this.cvv = max;
+                }
             },
         },
     };
