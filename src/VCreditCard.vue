@@ -82,6 +82,10 @@
                     return CARD_TYPES;
                 },
             },
+            maxYear: {
+                type: Number,
+                default: 10,
+            },
         },
         data() {
             return {
@@ -123,7 +127,7 @@
             },
         },
         mounted() {
-            const maxYear = new Date().getUTCFullYear() + 10;
+            const maxYear = new Date().getUTCFullYear() + this.maxYear;
             for (let i = new Date().getUTCFullYear(); i <= maxYear; i++) {
                 this.yearRange.push(i);
             }

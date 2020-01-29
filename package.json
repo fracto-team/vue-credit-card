@@ -20,7 +20,7 @@
       }
   ],
   "main": "./dist/vue-credit-card.common.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
