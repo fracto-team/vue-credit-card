@@ -75,18 +75,24 @@
                 return this.cvvField;
             },
             expiryMonth() {
+                if (!this.expiryMonthField) {
+                    return this.expiryMonthField;
+                }
                 if (this.hideSensitive && this.expiryMonthField) {
                     return getInitials(this.expiryMonthField, '*', '00');
                 }
 
-                return this.expiryMonthField.padStart(2, '0');
+                return this.expiryMonthField.toString().padStart(2, '0');
             },
             expiryYear() {
+                if (!this.expiryYearField) {
+                    return this.expiryYearField;
+                }
                 if (this.hideSensitive && this.expiryYearField) {
                     return getInitials(this.expiryYearField, '*', '00');
                 }
 
-                return this.expiryYearField.padStart(2, '0');
+                return this.expiryYearField.toString().padStart(2, '0');
             },
             cardTypeImage() {
                 const type = getCardType(this.cardNumberField, this.cardTypes);

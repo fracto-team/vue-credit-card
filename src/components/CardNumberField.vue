@@ -1,5 +1,5 @@
 <template>
-    <input type="text" :value="display" @keydown="inputNumber($event)" @input="onUpdate($event)"/>
+    <input type="text" :value="display" @keydown="inputNumber($event)" @input="onUpdate($event)" autocomplete="cc-number"/>
 </template>
 <script>
     import {maskCard} from '../functions/functions';

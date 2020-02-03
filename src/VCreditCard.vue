@@ -22,7 +22,7 @@
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="holder">{{$t('form.holder')}}</label>
-                    <input type="text" class="vcc-control" id="holder" v-model="fullName"/>
+                    <input type="text" class="vcc-control" id="holder" v-model="fullName" autocomplete="cc-name"/>
                 </div>
             </div>
             <div class="vcc-col">
@@ -37,7 +37,7 @@
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryMonth">{{$t('form.expiryMonth')}}</label>
-                    <select class="vcc-control" id="expiryMonth" v-model="expiryMonth">
+                    <select class="vcc-control" id="expiryMonth" v-model="expiryMonth" autocomplete="cc-exp-month">
                         <option :value="month" v-for="month in 12" :key="month">{{month}}</option>
                     </select>
                 </div>
@@ -45,8 +45,9 @@
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryYear">{{$t('form.expiryYear')}}</label>
-                    <select class="vcc-control" id="expiryYear" v-model="expiryYear">
-                        <option :value="year" v-for="year in yearRange" :key="year">{{year}}</option>
+                    <select class="vcc-control" id="expiryYear" v-model="expiryYear" autocomplete="cc-exp-year">
+                        <option :value="year.toString().slice(-2)" v-for="year in yearRange" :key="year">{{year}}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -54,6 +55,7 @@
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="cvv">{{$t('form.cvv')}}</label>
                     <input type="number" class="vcc-control" id="cvv" v-model="cvv" step="1" max="9999"
+                           autocomplete="cc-csc"
                            @input="cvvChanged"/>
                 </div>
             </div>
