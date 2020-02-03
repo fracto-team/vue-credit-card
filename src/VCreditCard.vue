@@ -105,7 +105,7 @@
                 return {
                     holder: this.fullName,
                     number: this.cardNumber,
-                    month: this.expiryMonth,
+                    month: this.expiryMonth ? this.expiryMonth.toString().padStart(1, '0') : this.expiryMonth,
                     year: this.expiryYear,
                     cvv: this.cvv,
                 };
