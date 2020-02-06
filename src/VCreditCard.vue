@@ -38,7 +38,9 @@
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryMonth">{{$t('form.expiryMonth')}}</label>
                     <select class="vcc-control" id="expiryMonth" v-model="expiryMonth" autocomplete="cc-exp-month">
-                        <option :value="month" v-for="month in 12" :key="month">{{month}}</option>
+                        <option :value="month.toString().padStart(1, '0')" v-for="month in 12" :key="month">
+                            {{month}}
+                        </option>
                     </select>
                 </div>
             </div>
