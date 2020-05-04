@@ -1,0 +1,17 @@
+{
+  "form": {
+    "sensitive": "Verstecke meine privaten Informationen",
+    "holder": "Vollständiger Name",
+    "number": "Kartennummer",
+    "expiryMonth": "Monat",
+    "expiryYear": "Jahr",
+    "cvv": "Sicherheitscode"
+  },
+  "placeholders": {
+    "holder": "Vorname Nachname",
+    "cvv": "XXX",
+    "expiryMonth": "XX",
+    "expiryYear": "XX",
+    "number": "0000 0000 0000 0000"
+  }
+}
