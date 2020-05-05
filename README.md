@@ -3,7 +3,7 @@
 Credit card component for vue
 
 ## Features
-Note: Localization supports only `Turkish` & `English` for now.
+Note: Localization supports only `Turkish` & `German` & `English` for now.
 - [x] Localization (i18n) (All translations are welcome)
 - [x] Card Preview
 - [x] Hide sensitive information
@@ -85,6 +85,9 @@ The variable `creditCardForm` is a `model` which formatted like this:
 ```
 
 #### Localization
+
+Available locales are `de`, `en` & `tr`
+
 ```html
 <div id="app">
 <vue-credit-card :preview-enabled="true" :card-types="cardTypes">
