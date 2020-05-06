@@ -22,14 +22,22 @@
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="holder">{{$t('form.holder')}}</label>
-                    <input type="text" class="vcc-control" id="holder" v-model="fullName" autocomplete="cc-name"/>
+                    <input type="text" class="vcc-control"
+                           :data-error="(cardErrors.cardFullName)"
+                           id="holder" v-model="fullName" autocomplete="cc-name"/>
+                    <div v-if="cardErrors.cardFullName" class="error">
+                        <small>{{ $t('validation.cardFullName') }}</small>
+                    </div>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="number">{{$t('form.number')}}</label>
-                    <card-number-field class="vcc-control" v-model="cardNumber" id="number">
-                    </card-number-field>
+                    <card-number-field :data-error="(cardErrors.cardNumber)"
+                                       class="vcc-control" v-model="cardNumber" id="number"/>
+                    <div v-if="cardErrors.cardNumber" class="error">
+                        <small>{{ $t('validation.cardNumber') }}</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,28 +45,41 @@
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryMonth">{{$t('form.expiryMonth')}}</label>
-                    <select class="vcc-control" id="expiryMonth" v-model="expiryMonth" autocomplete="cc-exp-month">
+                    <select class="vcc-control" id="expiryMonth" v-model="expiryMonth"
+                            :data-error="(cardErrors.cardExpiry)"
+                            autocomplete="cc-exp-month">
                         <option :value="month.toString().padStart(2, '0')" v-for="month in 12" :key="month">
                             {{month}}
                         </option>
                     </select>
+                    <div v-if="cardErrors.cardExpiry" class="error">
+                        <small>{{ $t('validation.cardExpiry') }}</small>
+                    </div>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryYear">{{$t('form.expiryYear')}}</label>
-                    <select class="vcc-control" id="expiryYear" v-model="expiryYear" autocomplete="cc-exp-year">
+                    <select class="vcc-control" id="expiryYear" v-model="expiryYear"
+                            :data-error="(cardErrors.cardExpiry)"
+                            autocomplete="cc-exp-year">
                         <option :value="year.toString().slice(-2)" v-for="year in yearRange" :key="year">{{year}}
                         </option>
                     </select>
+                    <div v-if="cardErrors.cardExpiry" class="error">
+                        <small>{{ $t('validation.cardExpiry') }}</small>
+                    </div>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="cvv">{{$t('form.cvv')}}</label>
                     <input type="number" class="vcc-control" id="cvv" v-model="cvv" step="1" max="9999"
-                           autocomplete="cc-csc"
+                           autocomplete="cc-csc" :data-error="(cardErrors.cardCvc)"
                            @input="cvvChanged"/>
+                    <div v-if="cardErrors.cardCvc" class="error">
+                        <small>{{ $t('validation.cardCvc') }}</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,6 +91,7 @@
     import CardNumberField from './components/CardNumberField';
     import {CARD_TYPES} from './contants/card_types_constants';
     import i18n from './i18n';
+    import {VALIDATION} from "./validation/validation";
 
     export default {
         i18n,
@@ -100,6 +122,7 @@
                 fullName: '',
                 sensitive: false,
                 yearRange: [],
+                cardErrors: {},
             };
         },
         computed: {
@@ -115,18 +138,23 @@
         },
         watch: {
             fullName() {
+                this.validate("fullName")
                 this.$emit('input', this.model);
             },
             cardNumber() {
+                this.validate("cardNumber")
                 this.$emit('input', this.model);
             },
             expiryMonth() {
+                this.validate("expiryMonth")
                 this.$emit('input', this.model);
             },
             expiryYear() {
+                this.validate("expiryYear")
                 this.$emit('input', this.model);
             },
             cvv() {
+                this.validate("cvc")
                 this.$emit('input', this.model);
             },
         },
@@ -137,6 +165,20 @@
             }
         },
         methods: {
+            validate(fieldName) {
+                if (fieldName === 'cardNumber'){
+                    this.cardErrors.cardNumber = !VALIDATION.validateCardNumber(this.cardNumber);
+                }
+                if (fieldName === 'fullName'){
+                    this.cardErrors.cardFullName = !VALIDATION.validateFullName(this.fullName);
+                }
+                if (fieldName === 'cvc'){
+                    this.cardErrors.cardCvc = !VALIDATION.validateCvc(this.cvv)
+                }
+                if (fieldName === 'expiryMonth' || fieldName === 'expiryYear'){
+                    this.cardErrors.cardExpiry = !VALIDATION.validateExpiry(this.expiryMonth, this.expiryYear)
+                }
+            },
             cvvChanged($ev) {
                 const max = parseInt($ev.target.max);
                 if (this.cvv > max) {
@@ -222,5 +264,13 @@
         flex-basis: 160px;
         margin: 0;
         padding: 0 4px;
+    }
+
+    .vcc-form-group input[data-error="true"], select[data-error="true"] {
+        border-color: #dc3545;
+    }
+
+    .vcc-form-group div.error {
+        color: #f00;
     }
 </style>

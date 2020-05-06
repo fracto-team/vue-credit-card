@@ -13,5 +13,11 @@
     "expiryMonth": "XX",
     "expiryYear": "XX",
     "number": "0000 0000 0000 0000"
+  },
+  "validation": {
+    "cardFullName": "İsim ve Soyisminiz Gereklidir.",
+    "cardNumber": "Geçersiz Kredi Kartı Numarası.",
+    "cardExpiry": "Geçersiz Sona Erme Tarihi.",
+    "cardCvc": "Geçersiz CVC."
   }
 }

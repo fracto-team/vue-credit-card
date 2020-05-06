@@ -2,22 +2,27 @@
   "name": "@fracto/vue-credit-card",
   "description": "Another Credit Card Component for VueJS",
   "keywords": [
-      "vue",
-      "component",
-      "credit",
-      "credit card"
+    "vue",
+    "component",
+    "credit",
+    "credit card"
   ],
   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/fracto-team/vue-credit-card.git"
+    "type": "git",
+    "url": "git+https://github.com/fracto-team/vue-credit-card.git"
   },
   "author": "Orkun ÇAKILKAYA <orkuncakilkaya@gmail.com>",
   "contributors": [
-      {
-          "name": "Eray Aydın",
-          "email": "er@yayd.in",
-          "url": "https://era.yayd.in"
-      }
+    {
+      "name": "Eray Aydın",
+      "email": "er@yayd.in",
+      "url": "https://era.yayd.in"
+    },
+    {
+      "name": "Abdullah Bozdağ",
+      "email": "abdullah@sanalyer.com",
+      "url": "https://abdullahbozdag.com"
+    }
   ],
   "main": "./dist/vue-credit-card.common.js",
   "version": "0.5.0",

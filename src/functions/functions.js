@@ -20,7 +20,7 @@ export function replaceDigits(string = '', replace = '*') {
 }
 
 export function getCardType(cardNum, cardTypes = []) {
-    if (!cardTypes) {
+    if (!cardTypes.length) {
         cardTypes = CARD_TYPES;
     }
     let cardType = null;

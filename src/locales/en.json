@@ -13,5 +13,11 @@
     "expiryMonth": "XX",
     "expiryYear": "XX",
     "number": "0000 0000 0000 0000"
+  },
+  "validation": {
+    "cardFullName": "Your Name and Surname are Required.",
+    "cardNumber": "Invalid Credit Card Number.",
+    "cardExpiry": "Invalid Expiration Date.",
+    "cardCvc": "Invalid CVC."
   }
 }
