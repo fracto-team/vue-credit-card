@@ -5,11 +5,11 @@
     "number": "Kart Numarası",
     "expiryMonth": "Ay",
     "expiryYear": "Yıl",
-    "cvv": "Güvenlik Kodu"
+    "cvc": "Güvenlik Kodu"
   },
   "placeholders": {
     "holder": "İsim Soyisim",
-    "cvv": "XXX",
+    "cvc": "XXX",
     "expiryMonth": "XX",
     "expiryYear": "XX",
     "number": "0000 0000 0000 0000"

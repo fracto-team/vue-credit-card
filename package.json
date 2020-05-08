@@ -43,6 +43,8 @@
   ],
   "dependencies": {
     "core-js": "^3.4.3",
+    "deep-equal": "^2.0.3",
+    "es6-promise": "^4.2.8",
     "vanilla-masker": "^1.2.0",
     "vue": "^2.6.10",
     "vue-i18n": "^8.0.0"

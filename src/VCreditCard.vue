@@ -4,7 +4,7 @@
                 v-if="previewEnabled"
                 :card-types="cardTypes"
                 :card-number-field="cardNumber"
-                :cvv-field="cvv"
+                :cvc-field="cvc"
                 :expiry-month-field="expiryMonth"
                 :expiry-year-field="expiryYear"
                 :full-name-field="fullName"
@@ -23,21 +23,18 @@
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="holder">{{$t('form.holder')}}</label>
                     <input type="text" class="vcc-control"
-                           :data-error="(cardErrors.cardFullName)"
+                           :class="{'vcc-error': validation.hasError('fullName')}"
                            id="holder" v-model="fullName" autocomplete="cc-name"/>
-                    <div v-if="cardErrors.cardFullName" class="error">
-                        <small>{{ $t('validation.cardFullName') }}</small>
-                    </div>
+                    <div class="vcc-error">{{ validation.firstError('fullName') }}</div>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="number">{{$t('form.number')}}</label>
-                    <card-number-field :data-error="(cardErrors.cardNumber)"
-                                       class="vcc-control" v-model="cardNumber" id="number"/>
-                    <div v-if="cardErrors.cardNumber" class="error">
-                        <small>{{ $t('validation.cardNumber') }}</small>
-                    </div>
+                    <card-number-field class="vcc-control" v-model="cardNumber"
+                                       :class="{'vcc-error': validation.hasError('cardNumber')}"
+                                       id="number"/>
+                    <div class="vcc-error">{{ validation.firstError('cardNumber') }}</div>
                 </div>
             </div>
         </div>
@@ -46,40 +43,35 @@
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryMonth">{{$t('form.expiryMonth')}}</label>
                     <select class="vcc-control" id="expiryMonth" v-model="expiryMonth"
-                            :data-error="(cardErrors.cardExpiry)"
+                            :class="{'vcc-error': validation.hasError('expiryMonth')}"
                             autocomplete="cc-exp-month">
                         <option :value="month.toString().padStart(2, '0')" v-for="month in 12" :key="month">
                             {{month}}
                         </option>
                     </select>
-                    <div v-if="cardErrors.cardExpiry" class="error">
-                        <small>{{ $t('validation.cardExpiry') }}</small>
-                    </div>
+                    <div class="vcc-error">{{ validation.firstError('expiryMonth') }}</div>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
                     <label class="vcc-label" for="expiryYear">{{$t('form.expiryYear')}}</label>
                     <select class="vcc-control" id="expiryYear" v-model="expiryYear"
-                            :data-error="(cardErrors.cardExpiry)"
+                            :class="{'vcc-error': validation.hasError('expiryMonth')}"
                             autocomplete="cc-exp-year">
                         <option :value="year.toString().slice(-2)" v-for="year in yearRange" :key="year">{{year}}
                         </option>
                     </select>
-                    <div v-if="cardErrors.cardExpiry" class="error">
-                        <small>{{ $t('validation.cardExpiry') }}</small>
-                    </div>
+                    <div class="vcc-error">{{ validation.firstError('expiryMonth') }}</div>
                 </div>
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
-                    <label class="vcc-label" for="cvv">{{$t('form.cvv')}}</label>
-                    <input type="number" class="vcc-control" id="cvv" v-model="cvv" step="1" max="9999"
-                           autocomplete="cc-csc" :data-error="(cardErrors.cardCvc)"
-                           @input="cvvChanged"/>
-                    <div v-if="cardErrors.cardCvc" class="error">
-                        <small>{{ $t('validation.cardCvc') }}</small>
-                    </div>
+                    <label class="vcc-label" for="cvc">{{$t('form.cvc')}}</label>
+                    <input type="number" class="vcc-control" id="cvc" v-model="cvc" step="1" max="9999"
+                           :class="{'vcc-error': validation.hasError('cvc')}"
+                           autocomplete="cc-csc"
+                           @input="cvcChanged"/>
+                    <div class="vcc-error">{{ validation.firstError('cvc') }}</div>
                 </div>
             </div>
         </div>
@@ -87,12 +79,16 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     import CardPreview from './components/CardPreview';
     import CardNumberField from './components/CardNumberField';
     import {CARD_TYPES} from './contants/card_types_constants';
     import i18n from './i18n';
-    import {VALIDATION} from "./validation/validation";
+    import Validation from './validation/validation';
 
+    Vue.use(Validation);
+    const Validator = Validation.Validator;
+    Validation.setWork('true')
     export default {
         i18n,
         name: 'v-credit-card',
@@ -116,14 +112,29 @@
         data() {
             return {
                 cardNumber: '',
-                cvv: '',
+                cvc: '',
                 expiryMonth: '',
                 expiryYear: '',
                 fullName: '',
                 sensitive: false,
-                yearRange: [],
-                cardErrors: {},
+                yearRange: []
             };
+        },
+        validators: {
+            fullName: function (value) {
+                // return Validator.value(value).required().regex('^[A-Za-z]*$', 'Must only contain alphabetic characters.');
+                return Validator.value(value).required(this.$t('validation.required'));
+            },
+            cardNumber: function (value) {
+                return Validator.value(value).required().cardNumber().length(16, this.$t('validation.length'));
+            },
+            'expiryMonth, expiryYear': function (month, year) {
+                return Validator.value(month + year).required().cardExpiry(this.$t('validation.cardExpiry'))
+            },
+            cvc: function (value) {
+                const cvcErrorMessage = this.$t('validation.lengthBetween')
+                return Validator.value(value).required().lengthBetween(3, 4, cvcErrorMessage);
+            }
         },
         computed: {
             model() {
@@ -132,29 +143,24 @@
                     number: this.cardNumber,
                     month: this.expiryMonth ? this.expiryMonth.toString().padStart(1, '0') : this.expiryMonth,
                     year: this.expiryYear,
-                    cvv: this.cvv,
+                    cvc: this.cvc,
                 };
-            },
+            }
         },
         watch: {
             fullName() {
-                this.validate("fullName")
                 this.$emit('input', this.model);
             },
             cardNumber() {
-                this.validate("cardNumber")
                 this.$emit('input', this.model);
             },
             expiryMonth() {
-                this.validate("expiryMonth")
                 this.$emit('input', this.model);
             },
             expiryYear() {
-                this.validate("expiryYear")
                 this.$emit('input', this.model);
             },
-            cvv() {
-                this.validate("cvc")
+            cvc() {
                 this.$emit('input', this.model);
             },
         },
@@ -165,24 +171,10 @@
             }
         },
         methods: {
-            validate(fieldName) {
-                if (fieldName === 'cardNumber'){
-                    this.cardErrors.cardNumber = !VALIDATION.validateCardNumber(this.cardNumber);
-                }
-                if (fieldName === 'fullName'){
-                    this.cardErrors.cardFullName = !VALIDATION.validateFullName(this.fullName);
-                }
-                if (fieldName === 'cvc'){
-                    this.cardErrors.cardCvc = !VALIDATION.validateCvc(this.cvv)
-                }
-                if (fieldName === 'expiryMonth' || fieldName === 'expiryYear'){
-                    this.cardErrors.cardExpiry = !VALIDATION.validateExpiry(this.expiryMonth, this.expiryYear)
-                }
-            },
-            cvvChanged($ev) {
+            cvcChanged($ev) {
                 const max = parseInt($ev.target.max);
-                if (this.cvv > max) {
-                    this.cvv = max;
+                if (this.cvc > max) {
+                    this.cvc = max;
                 }
             },
         },
@@ -266,11 +258,8 @@
         padding: 0 4px;
     }
 
-    .vcc-form-group input[data-error="true"], select[data-error="true"] {
-        border-color: #dc3545;
-    }
-
-    .vcc-form-group div.error {
+    .vcc-error {
         color: #f00;
+        border-color: #dc3545;
     }
 </style>

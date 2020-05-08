@@ -80,7 +80,7 @@ The variable `creditCardForm` is a `model` which formatted like this:
     "number": 9792030000000000,
     "month": 12,
     "year": 23,
-    "cvv": 456
+    "cvc": 456
 }
 ```
 

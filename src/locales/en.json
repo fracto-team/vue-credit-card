@@ -5,19 +5,24 @@
     "number": "Card Number",
     "expiryMonth": "Month",
     "expiryYear": "Year",
-    "cvv": "Security Code"
+    "cvc": "Security Code"
   },
   "placeholders": {
     "holder": "Firstname Lastname",
-    "cvv": "XXX",
+    "cvc": "XXX",
     "expiryMonth": "XX",
     "expiryYear": "XX",
     "number": "0000 0000 0000 0000"
   },
   "validation": {
+    "required": "Required.",
     "cardFullName": "Your Name and Surname are Required.",
     "cardNumber": "Invalid Credit Card Number.",
     "cardExpiry": "Invalid Expiration Date.",
-    "cardCvc": "Invalid CVC."
+    "cardCvc": "Invalid CVC.",
+    "length": "Length must be {0}.",
+    "minLength": "Must have at least {0} characters.",
+    "maxLength": "Must have up to {0} characters.",
+    "lengthBetween": "Length must between {0} and {1}."
   }
 }

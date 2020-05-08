@@ -5,11 +5,11 @@
     "number": "Kartennummer",
     "expiryMonth": "Monat",
     "expiryYear": "Jahr",
-    "cvv": "Sicherheitscode"
+    "cvc": "Sicherheitscode"
   },
   "placeholders": {
     "holder": "Vorname Nachname",
-    "cvv": "XXX",
+    "cvc": "XXX",
     "expiryMonth": "XX",
     "expiryYear": "XX",
     "number": "0000 0000 0000 0000"

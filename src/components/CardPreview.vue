@@ -24,8 +24,8 @@
         <div class="vcc-credit-card-back vcc-credit-card">
             <div class="vcc-credit-card-inner">
                 <div class="vcc-credit-card-magnet">&nbsp;</div>
-                <div class="vcc-credit-card-cvv">
-                    {{cvv || $t('placeholders.cvv')}}
+                <div class="vcc-credit-card-cvc">
+                    {{cvc || $t('placeholders.cvc')}}
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             'expiryMonthField',
             'expiryYearField',
             'fullNameField',
-            'cvvField',
+            'cvcField',
             'cardTypes',
         ],
         data() {
@@ -67,12 +67,12 @@
                 }
                 return this.fullNameField;
             },
-            cvv() {
-                if (this.hideSensitive && this.cvvField) {
-                    return replaceDigits(this.cvvField, '*');
+            cvc() {
+                if (this.hideSensitive && this.cvcField) {
+                    return replaceDigits(this.cvcField, '*');
                 }
 
-                return this.cvvField;
+                return this.cvcField;
             },
             expiryMonth() {
                 if (!this.expiryMonthField) {
@@ -151,7 +151,7 @@
         background-color: #4a4a4a;
     }
 
-    .vcc-credit-card-preview .vcc-credit-card-cvv {
+    .vcc-credit-card-preview .vcc-credit-card-cvc {
         position: absolute;
         width: calc(14px * 3);
         font-size: 14px;
