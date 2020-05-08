@@ -9,7 +9,7 @@ Note: Localization supports only `Turkish` & `German` & `English` for now.
 - [x] Hide sensitive information
 - [x] Card input mask
 - [x] Easily customizable
-- [ ] Validator
+- [x] Validator
 
 ## Getting Started
 
@@ -101,6 +101,26 @@ Available locales are `de`, `en` & `tr`
     var app = new Vue({
         el: '#app',
     });
+</script>
+```
+
+#### Validation
+
+There a 2 difference worker concerning how validation would interact with user input:
+`true`, `false
+`
+
+```html
+<div id="app">
+  <vue-credit-card></vue-credit-card>
+</div>
+
+<script>
+  VueCreditCard.validate.setWork('false'); // default true
+  Vue.component('vue-credit-card', VueCreditCard);
+  new Vue({
+    el: '#app',
+  });
 </script>
 ```
 

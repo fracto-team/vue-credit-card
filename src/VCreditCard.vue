@@ -79,18 +79,13 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import CardPreview from './components/CardPreview';
     import CardNumberField from './components/CardNumberField';
     import {CARD_TYPES} from './contants/card_types_constants';
+    import {validate} from "./validation";
     import i18n from './i18n';
-    import Validation from './validation/validation';
-
-    Vue.use(Validation);
-    const Validator = Validation.Validator;
-    Validation.setWork('true')
     export default {
-        i18n,
+        i18n, validate,
         name: 'v-credit-card',
         components: {CardPreview, CardNumberField},
         props: {
@@ -117,23 +112,39 @@
                 expiryYear: '',
                 fullName: '',
                 sensitive: false,
-                yearRange: []
+                yearRange: [],
+                validator: validate.Validator
             };
         },
         validators: {
-            fullName: function (value) {
-                // return Validator.value(value).required().regex('^[A-Za-z]*$', 'Must only contain alphabetic characters.');
-                return Validator.value(value).required(this.$t('validation.required'));
+            fullName: {
+                cache: true,
+                debounce: 500,
+                validator: function (value) {
+                    return this.validator.value(value).required(this.$t('validation.required'));
+                },
             },
-            cardNumber: function (value) {
-                return Validator.value(value).required().cardNumber().length(16, this.$t('validation.length'));
+            cardNumber: {
+                cache: true,
+                debounce: 500,
+                validator: function (value) {
+                    return this.validator.value(value).required().cardNumber().length(16, this.$t('validation.length'));
+                },
             },
-            'expiryMonth, expiryYear': function (month, year) {
-                return Validator.value(month + year).required().cardExpiry(this.$t('validation.cardExpiry'))
+            'expiryMonth, expiryYear': {
+                cache: true,
+                debounce: 500,
+                validator: function (month, year) {
+                    return this.validator.value(month + year).required().cardExpiry(this.$t('validation.cardExpiry'))
+                },
             },
-            cvv: function (value) {
-                const cvvErrorMessage = this.$t('validation.lengthBetween')
-                return Validator.value(value).required().lengthBetween(3, 4, cvvErrorMessage);
+            cvv: {
+                cache: true,
+                debounce: 500,
+                validator: function (value) {
+                    const cvvErrorMessage = this.$t('validation.lengthBetween')
+                    return this.validator.value(value).required().lengthBetween(3, 4, cvvErrorMessage);
+                },
             }
         },
         computed: {

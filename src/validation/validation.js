@@ -17,6 +17,9 @@ function install(Vue, options) {
     if (options && options.mode) {
         setMode(options.mode);
     }
+    if (options && options.work) {
+        setWork(options.work);
+    }
     if (options && options.Promise) {
         mixin.Promise = options.Promise;
     }
