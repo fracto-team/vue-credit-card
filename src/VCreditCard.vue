@@ -4,7 +4,7 @@
                 v-if="previewEnabled"
                 :card-types="cardTypes"
                 :card-number-field="cardNumber"
-                :cvc-field="cvc"
+                :cvv-field="cvv"
                 :expiry-month-field="expiryMonth"
                 :expiry-year-field="expiryYear"
                 :full-name-field="fullName"
@@ -66,12 +66,12 @@
             </div>
             <div class="vcc-col">
                 <div class="vcc-form-group">
-                    <label class="vcc-label" for="cvc">{{$t('form.cvc')}}</label>
-                    <input type="number" class="vcc-control" id="cvc" v-model="cvc" step="1" max="9999"
-                           :class="{'vcc-error': validation.hasError('cvc')}"
+                    <label class="vcc-label" for="cvv">{{$t('form.cvv')}}</label>
+                    <input type="number" class="vcc-control" id="cvv" v-model="cvv" step="1" max="9999"
+                           :class="{'vcc-error': validation.hasError('cvv')}"
                            autocomplete="cc-csc"
-                           @input="cvcChanged"/>
-                    <div class="vcc-error">{{ validation.firstError('cvc') }}</div>
+                           @input="cvvChanged"/>
+                    <div class="vcc-error">{{ validation.firstError('cvv') }}</div>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
         data() {
             return {
                 cardNumber: '',
-                cvc: '',
+                cvv: '',
                 expiryMonth: '',
                 expiryYear: '',
                 fullName: '',
@@ -131,9 +131,9 @@
             'expiryMonth, expiryYear': function (month, year) {
                 return Validator.value(month + year).required().cardExpiry(this.$t('validation.cardExpiry'))
             },
-            cvc: function (value) {
-                const cvcErrorMessage = this.$t('validation.lengthBetween')
-                return Validator.value(value).required().lengthBetween(3, 4, cvcErrorMessage);
+            cvv: function (value) {
+                const cvvErrorMessage = this.$t('validation.lengthBetween')
+                return Validator.value(value).required().lengthBetween(3, 4, cvvErrorMessage);
             }
         },
         computed: {
@@ -143,7 +143,7 @@
                     number: this.cardNumber,
                     month: this.expiryMonth ? this.expiryMonth.toString().padStart(1, '0') : this.expiryMonth,
                     year: this.expiryYear,
-                    cvc: this.cvc,
+                    cvv: this.cvv,
                 };
             }
         },
@@ -160,7 +160,7 @@
             expiryYear() {
                 this.$emit('input', this.model);
             },
-            cvc() {
+            cvv() {
                 this.$emit('input', this.model);
             },
         },
@@ -171,10 +171,10 @@
             }
         },
         methods: {
-            cvcChanged($ev) {
+            cvvChanged($ev) {
                 const max = parseInt($ev.target.max);
-                if (this.cvc > max) {
-                    this.cvc = max;
+                if (this.cvv > max) {
+                    this.cvv = max;
                 }
             },
         },

@@ -5,11 +5,11 @@
     "number": "Kart Numarası",
     "expiryMonth": "Ay",
     "expiryYear": "Yıl",
-    "cvc": "Güvenlik Kodu"
+    "cvv": "Güvenlik Kodu"
   },
   "placeholders": {
     "holder": "İsim Soyisim",
-    "cvc": "XXX",
+    "cvv": "XXX",
     "expiryMonth": "XX",
     "expiryYear": "XX",
     "number": "0000 0000 0000 0000"
@@ -18,6 +18,6 @@
     "cardFullName": "İsim ve Soyisminiz Gereklidir.",
     "cardNumber": "Geçersiz Kredi Kartı Numarası.",
     "cardExpiry": "Geçersiz Sona Erme Tarihi.",
-    "cardCvc": "Geçersiz CVC."
+    "cardCvv": "Geçersiz CVC."
   }
 }

@@ -4,7 +4,7 @@ module.exports = {
   required: "Required.",
   cardNumber: 'Invalid Credit Card Number.',
   cardExpiry: "Invalid Expiration Date.",
-  cardCvc: "Invalid CVC.",
+  cardCvv: "Invalid CVC.",
   length: 'Length must be {0}.',
   minLength: 'Must have at least {0} characters.',
   maxLength: 'Must have up to {0} characters.',

@@ -5,11 +5,11 @@
     "number": "Kartennummer",
     "expiryMonth": "Monat",
     "expiryYear": "Jahr",
-    "cvc": "Sicherheitscode"
+    "cvv": "Sicherheitscode"
   },
   "placeholders": {
     "holder": "Vorname Nachname",
-    "cvc": "XXX",
+    "cvv": "XXX",
     "expiryMonth": "XX",
     "expiryYear": "XX",
     "number": "0000 0000 0000 0000"
@@ -18,6 +18,6 @@
     "cardFullName": "Ihr Vor- und Nachname sind erforderlich.",
     "cardNumber": "Ungültige Kreditkartennummer.",
     "cardExpiry": "Ungültiges Ablaufdatum.",
-    "cardCvc": "Ungültiger CVC."
+    "cardCvv": "Ungültiger CVC."
   }
 }
