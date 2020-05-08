@@ -15,9 +15,14 @@
     "number": "0000 0000 0000 0000"
   },
   "validation": {
+    "required": "Gerekli.",
+    "length": "Uzunluk {0} olmalıdır.",
+    "minLength": "En az {0} karakter içermelidir.",
+    "maxLength": "En fazla {0} karakter içermelidir.",
+    "lengthBetween": "Uzunluk {0} ile {1} arasında olmalıdır.",
     "cardFullName": "İsim ve Soyisminiz Gereklidir.",
     "cardNumber": "Geçersiz Kredi Kartı Numarası.",
     "cardExpiry": "Geçersiz Sona Erme Tarihi.",
-    "cardCvv": "Geçersiz CVC."
+    "cardCvv": "Geçersiz CVV."
   }
 }

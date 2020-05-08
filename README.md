@@ -106,7 +106,7 @@ Available locales are `de`, `en` & `tr`
 
 #### Validation
 
-There a 2 difference worker concerning how validation would interact with user input:
+There are 2 different workers concerning how validation wold interact with user input:
 `true`, `false
 `
 

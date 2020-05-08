@@ -19,7 +19,7 @@
     "cardFullName": "Your Name and Surname are Required.",
     "cardNumber": "Invalid Credit Card Number.",
     "cardExpiry": "Invalid Expiration Date.",
-    "cardCvv": "Invalid CVC.",
+    "cardCvv": "Invalid CVV.",
     "length": "Length must be {0}.",
     "minLength": "Must have at least {0} characters.",
     "maxLength": "Must have up to {0} characters.",

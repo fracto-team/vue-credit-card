@@ -15,9 +15,14 @@
     "number": "0000 0000 0000 0000"
   },
   "validation": {
+    "required": "Erforderlich.",
+    "length": "Die Länge muss {0} sein.",
+    "minLength": "Muss mindestens {0} Zeichen haben.",
+    "maxLength": "Muss bis zu {0} Zeichen enthalten.",
+    "lengthBetween": "Die Länge muss zwischen {0} und {1} liegen.",
     "cardFullName": "Ihr Vor- und Nachname sind erforderlich.",
     "cardNumber": "Ungültige Kreditkartennummer.",
     "cardExpiry": "Ungültiges Ablaufdatum.",
-    "cardCvv": "Ungültiger CVC."
+    "cardCvv": "Ungültiger CVV."
   }
 }
