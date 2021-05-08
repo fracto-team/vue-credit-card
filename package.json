@@ -19,7 +19,7 @@
           "url": "https://era.yayd.in"
       }
   ],
-  "main": "./dist/vue-credit-card.common.js",
+  "main": "./dist/VueCreditCard.common.js",
   "version": "0.5.0",
   "license": "MIT",
   "scripts": {
